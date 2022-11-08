@@ -92,12 +92,12 @@ int main()
       string uwu;
       while(getline(dic_uWu, uwu))
       {
-         cout << uwu << " ";
+        t1->insertWord_uWu(uwu);
+
       }
     }
 
 
-    t1->insertWord_uWu("firstcommit");
     
     return 0;
 }
