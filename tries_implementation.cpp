@@ -81,7 +81,7 @@ int main()
 {
     Trie_uWu *t1 = new Trie_uWu();
 
-    t1->insertWord_uWu("LOL");
+    t1->insertWord_uWu("firstcommit");
     
     return 0;
 }
