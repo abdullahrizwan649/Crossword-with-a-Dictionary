@@ -41,7 +41,7 @@ class Trie_uWu
         }
 
         //We assume that the words will not be capital//
-        int index_uwu = input[0] - 'A';
+        int index_uwu = input[0] - 'a';
 
         //To traverse through the trie and insert nodes after the root//
         TrieNode *child_uWu = NULL;
