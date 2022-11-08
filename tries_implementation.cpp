@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #define size 26
 using namespace std;
 
@@ -40,7 +42,7 @@ class Trie_uWu
             return;
         }
 
-        //We assume that the words will not be capital//
+        //We assume that the words will be lowercase//
         int index_uwu = input[0] - 'a';
 
         //To traverse through the trie and insert nodes after the root//
@@ -80,6 +82,20 @@ class Trie_uWu
 int main()
 {
     Trie_uWu *t1 = new Trie_uWu();
+
+    fstream dic_uWu;
+    dic_uWu.open("dictionary_uwu.txt",ios::in);
+
+     //checking whether the file is open
+    if (dic_uWu.is_open())
+    {
+      string uwu;
+      while(getline(dic_uWu, uwu))
+      {
+         cout << uwu << " ";
+      }
+    }
+
 
     t1->insertWord_uWu("firstcommit");
     
