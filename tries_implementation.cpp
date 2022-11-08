@@ -69,7 +69,6 @@ class Trie_uWu
         */
         insertuWu(child_uWu,input.substr(1));
 
-
     }
 
     void insertWord_uWu(string input)
@@ -77,12 +76,63 @@ class Trie_uWu
         insertuWu(root,input);
         cout<<"\nWord inserted\n";
     }
+
+    bool searchUtil_uWu(TrieNode *root, string key)
+    {
+        //Base case//
+        if (key.length()==0)
+        {
+            return root->isTerminal;
+        }
+
+            int index = key[0] - 'a';
+
+            TrieNode* child;
+
+            //If the first character is present//
+            if(root->children[index] != NULL)
+            {
+                child = root->children[index];
+            }
+            /*If the first character is absent, 
+              key isn't avalable in trie*/
+            
+            else
+            {
+                return false;
+            }
+            
+            return searchUtil_uWu(child, key.substr(1));
+    }
+    
+
+    void search_uWu(string key)
+    {
+       
+        if(searchUtil_uWu(root, key))
+        {
+            cout<<"found";
+        }
+        else
+        {
+            cout<<"NOT HERE MFER!";
+        }
+        
+    }
+        
+        
+    
 };
 
 int main()
 {
     Trie_uWu *t1 = new Trie_uWu();
 
+    //should not be found jbtw
+    string x = "x";
+
+    //t1->insertWord_uWu(x);
+    
     fstream dic_uWu;
     dic_uWu.open("dictionary_uwu.txt",ios::in);
 
@@ -92,11 +142,13 @@ int main()
       string uwu;
       while(getline(dic_uWu, uwu))
       {
+
         t1->insertWord_uWu(uwu);
 
       }
     }
 
+    t1->search_uWu(x);
 
     
     return 0;
