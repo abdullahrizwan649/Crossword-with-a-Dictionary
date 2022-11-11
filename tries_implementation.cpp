@@ -9,7 +9,7 @@ class TrieNode
     public:
         char data;
         TrieNode *children[size];
-        bool isTerminal;
+        bool isTerminal;    //end of word
 
         //constructor
         TrieNode(char ch)
@@ -24,16 +24,16 @@ class TrieNode
         }
 };
 
-class Trie_uWu
+class Trie
 {
     public:
         TrieNode *root;
-        Trie_uWu()
+        Trie()
         {
             root = new TrieNode('\0');
         }
 
-    void insertuWu(TrieNode *root, string input)
+    void insertS(TrieNode *root, string input)
     {
         //base case
         if(input.length() == 0)
@@ -43,41 +43,41 @@ class Trie_uWu
         }
 
         //We assume that the words will be lowercase//
-        int index_uwu = input[0] - 'a';
+        int index = input[0] - 'a';
 
         //To traverse through the trie and insert nodes after the root//
-        TrieNode *child_uWu = NULL;
+        TrieNode *childPtr = NULL;
 
         //If the character is present//
-        if(root->children[index_uwu] != NULL)
+        if(root->children[index] != NULL)
         {
-            child_uWu = root->children[index_uwu];
+            childPtr = root->children[index];
         }
 
         //else if the character isn't present//
         else
         {
-            child_uWu = new TrieNode (input[0]);
-            root->children[index_uwu] = child_uWu;
+            childPtr = new TrieNode (input[0]);
+            root->children[index] = childPtr;
         }
         
         /*
         Recursively calling the function.
         
-        The function parameterises the child node
-        and the next character of the input string
+        The function sends child node as parameter 
+        and substring of input starting from first character
         */
-        insertuWu(child_uWu,input.substr(1));
+        insertS(childPtr,input.substr(1));
 
     }
 
-    void insertWord_uWu(string input)
+    void insertWord(string input)
     {
-        insertuWu(root,input);
-        cout<<"\nWord inserted\n";
+        insertS(root,input);
+        // cout<<"\nWord inserted\n";
     }
 
-    bool searchUtil_uWu(TrieNode *root, string key)
+    bool searchUTill(TrieNode *root, string key)
     {
         //Base case//
         if (key.length()==0)
@@ -94,62 +94,28 @@ class Trie_uWu
             {
                 child = root->children[index];
             }
+
             /*If the first character is absent, 
               key isn't avalable in trie*/
-            
             else
             {
                 return false;
             }
             
-            return searchUtil_uWu(child, key.substr(1));
+            return searchUTill(child, key.substr(1));
     }
     
-
-    void search_uWu(string key)
+    bool searchWord(string key)
     {
-       
-        if(searchUtil_uWu(root, key))
+        if(searchUTill(root, key))
         {
-            cout<<"found";
+            // cout<<"\nFOUND!";
+            return 1;
         }
         else
         {
-            cout<<"NOT HERE MFER!";
+            // cout<<"\nNOT HERE!";
+            return 0;
         }
-        
     }
-        
-        
-    
 };
-
-int main()
-{
-    Trie_uWu *t1 = new Trie_uWu();
-
-    //should not be found jbtw
-    string x = "x";
-
-    //t1->insertWord_uWu(x);
-    
-    fstream dic_uWu;
-    dic_uWu.open("dictionary_uwu.txt",ios::in);
-
-     //checking whether the file is open
-    if (dic_uWu.is_open())
-    {
-      string uwu;
-      while(getline(dic_uWu, uwu))
-      {
-
-        t1->insertWord_uWu(uwu);
-
-      }
-    }
-
-    t1->search_uWu(x);
-
-    
-    return 0;
-}
